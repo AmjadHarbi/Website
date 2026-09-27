@@ -12,6 +12,8 @@ type HeroData = {
   yearsExperience?: number;
 };
 
+const HERO_API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "");
+
 export default function Hero() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [isLoading, setIsLoading] = useState(true);
@@ -23,10 +25,15 @@ export default function Hero() {
   });
 
   useEffect(() => {
+    if (!HERO_API_BASE) {
+      setIsLoading(false);
+      return;
+    }
+
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 10000);
 
-    fetch("http://localhost:8080/api/hero", {
+    fetch(`${HERO_API_BASE}/api/hero`, {
       signal: controller.signal,
       cache: "no-store",
     })
@@ -44,7 +51,9 @@ export default function Hero() {
         });
       })
       .catch((error) => {
-        console.warn("Hero backend unavailable:", error);
+        if (error instanceof Error && error.name === "AbortError") {
+          return;
+        }
       })
       .finally(() => {
         setIsLoading(false);
@@ -59,12 +68,23 @@ export default function Hero() {
 
   const nameText = (hero.name ?? "AMJAD").toUpperCase();
 
+  const changeSection = (key: string) => {
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("portfolio-section-change", {
+          detail: { key },
+        }),
+      );
+      window.history.replaceState({}, "", `#${key}`);
+    }
+  };
+
   return (
     <FadeInSection>
       <section
         onMouseMove={(e) => {
-          const x = (e.clientX / window.innerWidth - 0.5) * 30;
-          const y = (e.clientY / window.innerHeight - 0.5) * 30;
+          const x = (e.clientX / window.innerWidth - 0.5) * 24;
+          const y = (e.clientY / window.innerHeight - 0.5) * 24;
 
           setPosition({ x, y });
         }}
@@ -73,37 +93,35 @@ export default function Hero() {
         <motion.div
           animate={{ x: position.x, y: position.y }}
           transition={{ type: "spring", stiffness: 40 }}
-          className="fixed inset-0 bg-cover bg-center scale-110 -z-10"
+          className="fixed inset-0 scale-105 bg-cover bg-center -z-10"
           style={{ backgroundImage: "url('/img/hero.png')" }}
         />
 
         <div
-          className="absolute inset-0 pointer-events-none"
+          className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage: "url('/img/stars.png')",
             backgroundPosition: "center",
             backgroundSize: "cover",
             zIndex: -3,
-            opacity: 0.2,
+            opacity: 0.18,
           }}
         />
-
-        {/* removed colored gradient overlay to keep hero background transparent */}
 
         <motion.div
           animate={{ x: position.x * 8, y: position.y * 8 }}
           transition={{ type: "spring", stiffness: 30 }}
-          className="absolute top-40 left-40 w-[500px] h-[500px] rounded-full blur-[140px] bg-pink-400/20"
+          className="absolute left-10 top-20 h-[280px] w-[280px] rounded-full bg-pink-400/20 blur-[120px] md:left-40 md:top-24 md:h-[500px] md:w-[500px]"
         />
 
         <div className="relative z-10 flex min-h-screen items-center">
-          <div className="max-w-4xl px-12">
-            <p className="mb-4 text-secondary tracking-widest uppercase">
-              Welcome, Everyone 👋
+          <div className="w-full max-w-4xl px-4 py-20 sm:px-6 md:px-10 lg:px-12">
+            <p className="mb-4 text-xs font-medium uppercase tracking-[0.28em] text-violet-200/80 sm:text-sm">
+              Amjad Almagthawi
             </p>
 
             <h1
-              className="text-5xl md:text-8xl font-black leading-none"
+              className="text-3xl font-black leading-none tracking-[-0.06em] sm:text-5xl md:text-7xl lg:text-8xl"
               style={{
                 background: "linear-gradient(90deg,#ffffff,#f9a8d4,#c084fc)",
                 WebkitBackgroundClip: "text",
@@ -117,78 +135,67 @@ export default function Hero() {
               ))}
             </h1>
 
-            <div className="mt-5 flex gap-2 flex-wrap">
-              <span className="rounded-full border border-pink-400/30 px-4 py-2 text-sm">
-                {hero.title}
+            <div className="mt-5 flex flex-wrap gap-2">
+              <span className="rounded-full border border-pink-400/30 bg-pink-500/10 px-3 py-2 text-xs font-medium text-pink-100 sm:text-sm">
+                Software Engineer
               </span>
 
-              <span className="rounded-full border border-indigo-400/30 px-4 py-2 text-sm">
-                {hero.subtitle}
-              </span>
-
-              <span className="rounded-full border border-yellow-300/30 px-4 py-2 text-sm">
+              <span className="rounded-full border border-indigo-400/30 bg-indigo-500/10 px-3 py-2 text-xs font-medium text-indigo-100 sm:text-sm">
                 Frontend Developer
+              </span>
+
+              <span className="rounded-full border border-yellow-300/30 bg-yellow-500/10 px-3 py-2 text-xs font-medium text-yellow-100 sm:text-sm">
+                AI Researcher
               </span>
             </div>
 
-            <p className="mt-8 max-w-2xl text-lg text-gray-300 leading-relaxed">
-              You've entered the world of a software engineer driven by curiosity,
-              research, and innovation. Explore completed quests, unlocked skills,
-              and achievements earned throughout a journey spanning AI, Blockchain,
-              and Frontend Development.
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-gray-300 sm:text-lg">
+              I build thoughtful digital experiences blending frontend engineering,
+              research, and product-focused problem solving.
             </p>
 
-            <div className="mt-10 flex gap-4">
-              <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 border border-pink-400/30 hover:bg-pink-200 hover:scale-105 transition">
-                ▶ Start Journey
-              </button>
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#projects"
+                onClick={(event) => {
+                  event.preventDefault();
+                  changeSection("projects");
+                }}
+                className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 to-purple-500 px-6 py-3 text-sm font-semibold text-white transition hover:brightness-110 sm:px-8"
+              >
+                View Projects
+              </a>
 
               <a
-                href="/amjad.pdf"
-                download="amjad.pdf"
+                href="/Amjad.pdf"
+                download="Amjad.pdf"
                 target="_blank"
                 rel="noreferrer"
-                className ="px-8 py-4 rounded-xl border border-yellow-300/40 hover:bg-yellow-200 hover:text-black transition inline-flex items-center justify-center"
+                className="inline-flex items-center justify-center rounded-xl border border-yellow-300/40 px-6 py-3 text-sm font-semibold text-yellow-100 transition hover:bg-yellow-200 hover:text-black sm:px-8"
               >
                 Download CV
               </a>
             </div>
 
-            <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white/5 dark:bg-white/5 backdrop-blur-xl p-5 rounded-xl border border-pink-300/10">
-                <h3 className="text-4xl font-bold">
-                  {isLoading ? (
-                    "..."
-                  ) : (
-                    <>
-                      <Counter end={4} />
-                      <span>+</span>
-                    </>
-                  )}
+            <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              <div className="rounded-xl border border-pink-300/10 bg-white/5 p-4 backdrop-blur-xl">
+                <h3 className="text-3xl font-bold text-white">
+                  {isLoading ? "..." : <Counter end={2} />}
                 </h3>
-                <p className="text-sm text-gray-400">Years Experience</p>
+                <p className="mt-2 text-sm text-gray-400">Degrees</p>
               </div>
 
-              <div className="bg-white/5 dark:bg-white/5 backdrop-blur-xl p-5 rounded-xl border border-pink-300/10">
-                <h3 className="text-4xl font-bold">
-                  <Counter end={2} />
+              <div className="rounded-xl border border-pink-300/10 bg-white/5 p-4 backdrop-blur-xl">
+                <h3 className="text-3xl font-bold text-white">
+                  {isLoading ? "..." : <Counter end={3} />}
                 </h3>
-                <p className="text-sm text-gray-400">Degrees Earned</p>
+                <p className="mt-2 text-sm text-gray-400">Focus Areas</p>
               </div>
 
-              <div className="bg-white/5 dark:bg-white/5 backdrop-blur-xl p-5 rounded-xl border border-pink-300/10">
-                <h3 className="text-3xl font-bold">
-                  <Counter end={3} />
-                </h3>
-                <p className="text-sm text-gray-400">Publications</p>
+              <div className="rounded-xl border border-pink-300/10 bg-white/5 p-4 backdrop-blur-xl sm:col-span-2 xl:col-span-1">
+                <h3 className="text-3xl font-bold text-white">AI</h3>
+                <p className="mt-2 text-sm text-gray-400">Research & product work</p>
               </div>
-
-              {/* <div className="bg-white/5 dark:bg-white/5 backdrop-blur-xl p-5 rounded-xl border border-pink-300/10">
-                <h3 className="text-3xl font-bold">
-                  <Counter end={20} />
-                </h3>
-                <p className="text-sm text-gray-400">Projects</p>
-              </div> */}
             </div>
           </div>
         </div>

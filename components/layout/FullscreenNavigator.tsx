@@ -19,11 +19,10 @@ import Contact from "@/components/sections/Contact";
 
 const labelToKey: Record<string, string> = {
   Home: "home",
-  Map: "journey-map",
-  Quests: "experience",
-  Academy: "education",
-  Skills: "skills",
-  Achievements: "achievements",
+  Experience: "experience",
+  Projects: "projects",
+  Research: "publications",
+  Education: "education",
   Contact: "contact",
 };
 
@@ -44,21 +43,68 @@ const sections: Record<string, React.FC<any>> = {
 export default function FullscreenNavigator() {
   const [active, setActive] = useState<string>("home");
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const sidebarOffset = collapsed ? 110 : 320;
+
+  const selectSection = (nextKey: string) => {
+    const normalized = labelToKey[nextKey] ?? nextKey.toLowerCase();
+    setActive(normalized in sections ? normalized : "home");
+    if (typeof window !== "undefined") {
+      window.history.replaceState({}, "", `#${normalized}`);
+    }
+  };
 
   useEffect(() => {
+    const updateViewport = () => {
+      const mobile = window.innerWidth < 1024;
+      setIsMobile(mobile);
+      if (mobile) {
+        setCollapsed(true);
+      }
+    };
+
+    const handleSectionRequest = (event: Event) => {
+      const detail = (event as CustomEvent<{ key?: string }>).detail;
+      if (detail?.key) {
+        selectSection(detail.key);
+      }
+    };
+
+    updateViewport();
+    window.addEventListener("resize", updateViewport);
+    window.addEventListener("portfolio-section-change", handleSectionRequest as EventListener);
+
     return () => {
-      // Intentionally left blank: normal page scrolling is allowed so section content can scroll.
+      window.removeEventListener("resize", updateViewport);
+      window.removeEventListener("portfolio-section-change", handleSectionRequest as EventListener);
     };
   }, []);
 
   const Section = sections[active] ?? Hero;
 
   return (
-    <div className="w-screen h-screen relative overflow-x-hidden">
+    <div className="relative h-screen w-screen overflow-x-hidden">
       <Sidebar
+        isMobile={isMobile}
+        mobileOpen={mobileNavOpen}
         collapsed={collapsed}
-        onToggle={() => setCollapsed((prev) => !prev)}
-        onSelect={(label) => setActive(labelToKey[label] ?? label.toLowerCase())}
+        activeKey={active}
+        onToggle={() => {
+          if (isMobile) {
+            setMobileNavOpen((prev) => !prev);
+            return;
+          }
+
+          setCollapsed((prev) => !prev);
+        }}
+        onSelect={(label) => {
+          selectSection(label);
+          if (isMobile) {
+            setMobileNavOpen(false);
+          }
+        }}
       />
       <ScrollGuard />
 
@@ -70,12 +116,17 @@ export default function FullscreenNavigator() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -20 }}
             transition={{ duration: 0.28 }}
-            className="w-screen h-screen overflow-y-auto overflow-x-hidden"
+            className="h-screen w-full overflow-y-auto overflow-x-hidden"
             style={{ scrollBehavior: "smooth" }}
           >
             <div
-              className="w-full min-h-screen"
-              style={{ paddingLeft: collapsed ? 90 : 300, paddingRight: 16, scrollBehavior: "smooth" }}
+              className="min-h-screen w-full max-w-full transition-all duration-300"
+              style={{
+                paddingLeft: isMobile ? 16 : sidebarOffset,
+                paddingRight: isMobile ? 16 : 28,
+                paddingTop: isMobile ? 76 : 24,
+                scrollBehavior: "smooth",
+              }}
             >
               <Section />
             </div>

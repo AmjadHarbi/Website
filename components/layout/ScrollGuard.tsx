@@ -18,6 +18,11 @@ export default function ScrollGuard() {
       if (!anchor) return;
 
       const href = anchor.getAttribute("href") ?? "";
+      const allowedHashes = new Set(["#home", "#experience", "#projects", "#publications", "#education", "#contact"]);
+      if (href.startsWith("#") && allowedHashes.has(href)) {
+        return;
+      }
+
       // only block fragment links
       if (!href.startsWith("#") && !href.includes(window.location.pathname + "#")) return;
 

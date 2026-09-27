@@ -13,18 +13,17 @@ export default function Projects() {
 
   return (
     <FadeInSection>
-      <section id="projects" className="min-h-screen bg-[#120d1f] px-4 py-10 text-white sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1200px] rounded-[30px] border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(116,78,183,0.22),_rgba(18,13,31,0.96)_42%)] px-5 py-8 sm:px-8 lg:px-10">
+      <section id="projects" className="bg-[#120d1f] px-4 py-20 text-white sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1200px] rounded-[30px] border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(116,78,183,0.22),_rgba(18,13,31,0.96)_42%)] px-4 py-8 sm:px-8 lg:px-10">
           <div className="flex items-end justify-between gap-6">
             <div>
-              {/* <p className="text-[11px] font-medium uppercase tracking-[0.38em] text-[#d3bee8]">Selected Work</p> */}
-              <h2 className="mt-4 text-5xl font-bold tracking-[-0.05em] text-white">Projects</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-[-0.05em] text-white sm:text-4xl lg:text-5xl">Projects</h2>
             </div>
 
           </div>
 
-          <p className="mt-6 max-w-xl text-base leading-7 text-[#d4c9ec]">
-            Personal builds, blockchain work at Taibah Valley, and product work across client engagements at Elm.
+          <p className="mt-6 max-w-2xl text-sm leading-7 text-[#d4c9ec] sm:text-base">
+            Personal builds, professional delivery work, and research focused on LLM-based Solidity vulnerability detection.
           </p>
 
           <div className="mt-8 flex flex-wrap gap-3">
@@ -60,12 +59,12 @@ export default function Projects() {
             {filteredProjects.map((project) => (
               <article
                 key={project.id}
-                className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-[#1b1430]/80 p-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition duration-200 hover:border-purple-300/20 hover:bg-[#20163a]"
+                className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-[#1b1430]/80 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition duration-200 hover:border-purple-300/20 hover:bg-[#20163a] sm:p-5"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg shadow-inner shadow-white/5">
-                      {project.category === "Personal" ? "✦" : project.category === "Taibah Valley" ? "◈" : "▣"}
+                      {project.category === "Personal" ? "✦" : project.category === "Research" ? "◉" : "▣"}
                     </div>
                   </div>
 
@@ -80,7 +79,7 @@ export default function Projects() {
                   {project.category}
                 </div>
 
-                <h3 className="mt-4 text-[22px] font-semibold leading-tight text-white">
+                <h3 className="mt-4 text-xl font-semibold leading-tight text-white sm:text-[22px]">
                   {project.title}
                 </h3>
 

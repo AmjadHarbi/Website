@@ -5,14 +5,12 @@ import {
   BookOpenText,
   BriefcaseBusiness,
   ChevronLeft,
-  ChevronRight,
   FolderKanban,
-  Globe,
+  Menu,
   GraduationCap,
   House,
   Mail,
-  UserRound,
-  FileText,
+  X,
 } from "lucide-react";
 
 const navGroups: Array<{
@@ -26,16 +24,14 @@ const navGroups: Array<{
 }> = [
   {
     title: "OVERVIEW",
-    items: [
-      { label: "Home", icon: House },
-    ],
+    items: [{ label: "Home", icon: House }],
   },
   {
     title: "WORK",
     items: [
       { label: "Experience", icon: BriefcaseBusiness },
-      { label: "Projects", icon: FolderKanban, count: 12 },
-      { label: "Publications", icon: BookOpenText, count: 3 },
+      { label: "Projects", icon: FolderKanban },
+      { label: "Research", icon: BookOpenText },
     ],
   },
   {
@@ -51,27 +47,56 @@ export default function Sidebar({
   onSelect,
   collapsed,
   onToggle,
+  activeKey,
+  isMobile,
+  mobileOpen,
 }: {
   onSelect?: (label: string) => void;
   collapsed?: boolean;
   onToggle?: () => void;
+  activeKey?: string;
+  isMobile?: boolean;
+  mobileOpen?: boolean;
 }) {
   const isCollapsed = collapsed ?? false;
+  const useMobile = isMobile ?? false;
+  const mobileIsOpen = mobileOpen ?? false;
+  const renderCollapsed = useMobile ? false : isCollapsed;
 
   return (
-    <aside
-      id="app-sidebar"
-      className={[
-        "relative fixed left-5 top-5 z-50 h-[88vh] overflow-hidden rounded-[32px] border border-[#6d4ca5]/40 bg-[#231b1b] text-white shadow-[0_0_30px_rgba(255,120,255,0.12)] transition-all duration-300",
-        isCollapsed ? "w-[64px] p-2" : "w-[280px] px-3 py-3",
-      ].join(" ")}
-    >
-      <div className={isCollapsed ? "relative flex justify-center pb-4" : "flex items-center justify-between pb-4"}>
-        {!isCollapsed && (
+    <>
+      {useMobile && (
+        <button
+          type="button"
+          aria-label={mobileIsOpen ? "Close navigation" : "Open navigation"}
+          onClick={onToggle}
+          className="fixed left-3 top-3 z-[60] inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-[#231b1b]/95 text-white shadow-lg backdrop-blur"
+        >
+          {mobileIsOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
+      )}
+
+      <aside
+        id="app-sidebar"
+        className={[
+          "fixed z-50 overflow-hidden rounded-[32px] border border-[#6d4ca5]/40 bg-[#231b1b] text-white shadow-[0_0_30px_rgba(255,120,255,0.12)] transition-all duration-300",
+          useMobile
+            ? [
+                "left-2 top-2 bottom-2 h-auto w-[min(80vw,280px)] px-3 py-3",
+                mobileIsOpen ? "translate-x-0 opacity-100" : "-translate-x-[120%] opacity-0 pointer-events-none",
+              ].join(" ")
+            : [
+                "left-3 top-3 h-[88vh]",
+                renderCollapsed ? "w-[64px] p-2" : "w-[280px] px-3 py-3",
+              ].join(" "),
+        ].join(" ")}
+      >
+      <div className={renderCollapsed ? "relative flex justify-center pb-4" : "flex items-center justify-between pb-4"}>
+        {!renderCollapsed && (
           <div className="flex items-center gap-3">
             <button
               type="button"
-              aria-label="Collapse sidebar"
+              aria-label={useMobile ? "Close navigation" : "Collapse sidebar"}
               onClick={onToggle}
               className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-[#ff8fd8] via-[#d462ff] to-[#9d7bff] text-3xl font-bold text-white shadow-lg shadow-pink-500/25 transition hover:brightness-110"
             >
@@ -85,7 +110,7 @@ export default function Sidebar({
           </div>
         )}
 
-        {isCollapsed && (
+        {renderCollapsed && (
           <button
             type="button"
             aria-label="Expand sidebar"
@@ -96,7 +121,7 @@ export default function Sidebar({
           </button>
         )}
 
-        {!isCollapsed && (
+        {!isCollapsed && !useMobile && (
           <button
             type="button"
             aria-label="Collapse sidebar"
@@ -108,7 +133,7 @@ export default function Sidebar({
         )}
       </div>
 
-      {!isCollapsed && (
+      {!renderCollapsed && (
         <nav className="space-y-5 pb-4">
           {navGroups.map((group) => (
             <div key={group.title}>
@@ -119,36 +144,15 @@ export default function Sidebar({
               <div className="space-y-2">
                 {group.items.map((item) => {
                   const Icon = item.icon;
-                  const isActive = item.active;
+                  const key = item.label === "Research" ? "publications" : item.label.toLowerCase();
+                  const isActive = activeKey === key || activeKey === item.label.toLowerCase();
 
                   return (
                     <button
                       key={item.label}
                       type="button"
-                      onClick={() => {
-                        if (onSelect) {
-                          onSelect(item.label);
-                          return;
-                        }
-
-                        const keyMap: Record<string, string> = {
-                          Home: "home",
-                          About: "about",
-                          Experience: "experience",
-                          Projects: "projects",
-                          Publications: "publications",
-                          Education: "education",
-                          Skills: "skills",
-                          Achievements: "achievements",
-                          Contact: "contact",
-                        };
-
-                        const key = keyMap[item.label] ?? item.label.toLowerCase();
-                        const el = document.getElementById(key);
-                        if (el) {
-                          el.scrollIntoView({ behavior: "smooth", block: "start" });
-                        }
-                      }}
+                      aria-label={`Navigate to ${item.label}`}
+                      onClick={() => onSelect?.(item.label)}
                       className={[
                         "flex w-full items-center rounded-2xl px-2.5 py-2.5 text-left transition",
                         isActive
@@ -160,8 +164,6 @@ export default function Sidebar({
                         <Icon size={22} className={isActive ? "text-white" : "text-[#f0e5ff] opacity-80"} />
                         <span className="text-[15px] font-medium leading-none tracking-[-0.04em]">{item.label}</span>
                       </div>
-
-                     
                     </button>
                   );
                 })}
@@ -171,19 +173,23 @@ export default function Sidebar({
         </nav>
       )}
 
-      {isCollapsed ? (
+      {renderCollapsed && !useMobile ? (
         <nav className="flex flex-col items-center gap-3 pt-2">
           {navGroups.flatMap((group) => group.items).map((item) => {
             const Icon = item.icon;
+            const key = item.label === "Research" ? "publications" : item.label.toLowerCase();
+            const isActive = activeKey === key || activeKey === item.label.toLowerCase();
+
             return (
               <button
                 key={item.label}
                 type="button"
+                aria-label={`Navigate to ${item.label}`}
                 title={item.label}
                 onClick={() => onSelect?.(item.label)}
                 className={[
                   "flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10",
-                  item.active ? "bg-gradient-to-r from-[#5b2f7a] to-[#3b2b5e] text-white" : "",
+                  isActive ? "bg-gradient-to-r from-[#5b2f7a] to-[#3b2b5e] text-white" : "",
                 ].join(" ")}
               >
                 <Icon size={20} />
@@ -237,6 +243,16 @@ export default function Sidebar({
           </div>
         </div>
       )}
-    </aside>
+      </aside>
+
+      {useMobile && mobileIsOpen && (
+        <button
+          type="button"
+          aria-label="Close navigation"
+          onClick={onToggle}
+          className="fixed inset-0 z-40 bg-black/35 backdrop-blur-[1px]"
+        />
+      )}
+    </>
   );
 }
