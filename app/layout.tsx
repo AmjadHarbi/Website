@@ -16,6 +16,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Amjad Almaghthawi",
   description: "Website of Amjad Almaghthawi, a software engineer and AI researcher. Explore my projects, achievements, and journey in the world of technology.",
+  icons: {
+    icon: "/img/moon.png",
+    shortcut: "/img/moon.png",
+    apple: "/img/moon.png",
+  },
 };
 
 export default function RootLayout({
