@@ -38,71 +38,30 @@ export const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Smart Contract Development",
+    title: "Smart Contract & Web3 Product Delivery",
     category: "Professional",
     description:
-      "Contributed to Solidity smart contract development and testing for accelerator projects, including token logic and marketplace workflows.",
-    tags: ["Solidity", "Hardhat", "Ethers.js"],
+      "Contributed to Solidity smart contract development, testing, and frontend delivery for accelerator products, including token logic, marketplace workflows, and wallet-connected interfaces.",
+    tags: ["Solidity", "Ethers.js", "React", "Web3.js"],
   },
   {
     id: 5,
-    title: "React UI for Web3 Products",
+    title: "Tawakalna Services (Abr & Meyah & Mazadat)",
     category: "Professional",
     description:
-      "Built frontend interfaces for blockchain products, connecting wallet flows and contract state to production-facing screens.",
-    tags: ["React", "Web3.js", "UI"],
+      "Contributed to Mazadat, Abr, and Meyah services in Tawakalna platform as part of a large team, working on UI development, API integration, and testing.",
+    tags: ["UI", "Integration", "Testing", "Tawakalna"],
   },
   {
     id: 6,
-    title: "Jira Service Integration",
+    title: "Enterprise Platform Enhancements",
     category: "Professional",
     description:
-      "Implemented UI components for Jira Service Management integration and connected the interface to ticketing workflows.",
-    tags: ["HTML", "JavaScript", "Jira Service"],
-    badge: "Production",
+      "Contributed across Jira Service integration, Dhamen core enhancements, and UX testing support for internal delivery tracks.",
+    tags: ["HTML", "JavaScript", "Jira Service", "UI", "UX Testing", "QA"],
   },
   {
     id: 7,
-    title: "Rased — Tawakalna",
-    category: "Professional",
-    description:
-      "Contributed to Rased within the Tawakalna platform as part of a broader product team.",
-    tags: ["UI", "Tawakalna"],
-  },
-  {
-    id: 8,
-    title: "Meyah — Tawakalna",
-    category: "Professional",
-    description:
-      "Worked on UI, API integration, and testing for Meyah in Tawakalna as part of a team delivery.",
-    tags: ["UI", "API Integration", "Testing"],
-  },
-  {
-    id: 9,
-    title: "UX Testing Support",
-    category: "Professional",
-    description:
-      "Supported Monther with UX testing, helping validate flows and catch usability issues before release.",
-    tags: ["UX Testing", "QA"],
-  },
-  {
-    id: 10,
-    title: "Dhamen — Core Enhancement",
-    category: "Professional",
-    description:
-      "Contributed to core enhancements for Dhamen, improving existing platform functionality within the product team.",
-    tags: ["UI", "Enhancement"],
-  },
-  {
-    id: 11,
-    title: "Abi — UI",
-    category: "Professional",
-    description:
-      "Contributed UI implementation work for Abr as part of internal delivery.",
-    tags: ["UI"],
-  },
-  {
-    id: 12,
     title: "LLM-based Solidity Vulnerability Detection",
     category: "Research",
     description:

@@ -3,36 +3,27 @@ import { achievements } from "@/data/achievements";
 
 export default function AchievementHall() {
   return (
-    <section className="py-32 px-10">
+    <section className="px-4 py-20 sm:px-6 lg:px-10">
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-10">
+          <h2 className="text-3xl font-bold tracking-[-0.05em] text-slate-900 sm:text-4xl lg:text-5xl">
+            Achievement Hall
+          </h2>
 
-      <div className="mb-16">
+          <p className="mt-4 max-w-2xl text-sm text-slate-600 sm:text-base">
+            Legendary milestones unlocked throughout the adventure.
+          </p>
+        </div>
 
-        <h2 className="text-6xl font-bold">
-          Achievement Hall
-        </h2>
-
-        <p className="text-muted mt-4">
-          Legendary milestones unlocked throughout the adventure.
-        </p>
-
+        <div className="grid gap-8 md:grid-cols-3 md:gap-10">
+          {achievements.map((achievement) => (
+            <AchievementMedal
+              key={achievement.title}
+              {...achievement}
+            />
+          ))}
+        </div>
       </div>
-
-      <div
-        className="
-        grid
-        md:grid-cols-3
-        gap-16
-        justify-items-center
-        "
-      >
-        {achievements.map((achievement) => (
-          <AchievementMedal
-            key={achievement.title}
-            {...achievement}
-          />
-        ))}
-      </div>
-
     </section>
   );
 }

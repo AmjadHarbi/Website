@@ -13,17 +13,17 @@ export default function JourneyMap() {
 
     return (
         <FadeInSection>
-            <section className="relative py-12 px-6">
+            <section className="relative px-4 py-20 sm:px-6 lg:px-10">
 
-                <div className="mb-20">
-                    <h2 className="text-6xl font-bold">Journey Map</h2>
+                <div className="mx-auto mb-10 max-w-5xl">
+                    <h2 className="text-3xl font-bold tracking-[-0.05em] text-slate-900 sm:text-4xl lg:text-5xl">Journey Map</h2>
 
-                    <p className="text-gray-400 mt-4">
+                    <p className="mt-4 max-w-2xl text-sm text-slate-600 sm:text-base">
                         Explore the locations that shaped my journey.
                     </p>
                 </div>
 
-                <div className="relative min-h-[580px] overflow-hidden rounded-[20px] border border-pink-400/8 bg-gradient-to-br from-[#171727] via-[#131322] to-[#0f1023] shadow-[0_0_36px_rgba(192,132,252,.05)]">
+                <div className="relative mx-auto min-h-[580px] max-w-5xl overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_18px_40px_rgba(15,23,42,0.04)]">
 
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(192,132,252,.12),transparent_35%)] z-0" />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(249,168,212,.08),transparent_35%)] z-0" />

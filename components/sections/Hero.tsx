@@ -88,22 +88,15 @@ export default function Hero() {
 
           setPosition({ x, y });
         }}
-        className="relative min-h-screen overflow-hidden"
+        className="relative isolate min-h-screen overflow-hidden"
       >
-        <motion.div
-          animate={{ x: position.x, y: position.y }}
-          transition={{ type: "spring", stiffness: 40 }}
-          className="fixed inset-0 scale-105 bg-cover bg-center -z-10"
-          style={{ backgroundImage: "url('/img/hero.png')" }}
-        />
-
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             backgroundImage: "url('/img/stars.png')",
             backgroundPosition: "center",
             backgroundSize: "cover",
-            zIndex: -3,
+            zIndex: 1,
             opacity: 0.18,
           }}
         />

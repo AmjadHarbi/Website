@@ -70,7 +70,7 @@ export default function Sidebar({
           type="button"
           aria-label={mobileIsOpen ? "Close navigation" : "Open navigation"}
           onClick={onToggle}
-          className="fixed left-3 top-3 z-[60] inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/15 bg-[#231b1b]/95 text-white shadow-lg backdrop-blur"
+          className="fixed left-3 top-3 z-[60] inline-flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white/95 text-slate-700 shadow-lg backdrop-blur"
         >
           {mobileIsOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
@@ -79,7 +79,7 @@ export default function Sidebar({
       <aside
         id="app-sidebar"
         className={[
-          "fixed z-50 overflow-hidden rounded-[32px] border border-[#6d4ca5]/40 bg-[#231b1b] text-white shadow-[0_0_30px_rgba(255,120,255,0.12)] transition-all duration-300",
+          "fixed z-50 overflow-hidden rounded-[32px] border border-slate-200 bg-white/95 text-slate-900 shadow-[0_12px_42px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-all duration-300",
           useMobile
             ? [
                 "left-2 top-2 bottom-2 h-auto w-[min(80vw,280px)] px-3 py-3",
@@ -104,8 +104,8 @@ export default function Sidebar({
             </button>
 
             <div className="leading-tight">
-              <div className="text-[16px] font-medium tracking-tight text-white">Amjad</div>
-              <div className="text-[11px] text-[#e6d9ff]">Software Engineer</div>
+              <div className="text-[16px] font-medium tracking-tight text-slate-900">Amjad</div>
+              <div className="text-[11px] text-slate-500">Software Engineer</div>
             </div>
           </div>
         )}
@@ -126,7 +126,7 @@ export default function Sidebar({
             type="button"
             aria-label="Collapse sidebar"
             onClick={onToggle}
-            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10"
+            className="flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-600 transition hover:bg-slate-100"
           >
             <ChevronLeft size={18} />
           </button>
@@ -137,7 +137,7 @@ export default function Sidebar({
         <nav className="space-y-5 pb-4">
           {navGroups.map((group) => (
             <div key={group.title}>
-              <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-[#c9bddf]">
+              <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
                 {group.title}
               </div>
 
@@ -156,12 +156,12 @@ export default function Sidebar({
                       className={[
                         "flex w-full items-center rounded-2xl px-2.5 py-2.5 text-left transition",
                         isActive
-                          ? "bg-gradient-to-r from-[#5b2f7a] to-[#3b2b5e] text-white shadow-inner shadow-[#8d5ae0]/20"
-                          : "text-[#f2ebff] hover:bg-white/5",
+                          ? "bg-pink-50 text-pink-700 shadow-inner shadow-pink-100"
+                          : "text-slate-600 hover:bg-slate-100",
                       ].join(" ")}
                     >
                       <div className="flex items-center gap-3">
-                        <Icon size={22} className={isActive ? "text-white" : "text-[#f0e5ff] opacity-80"} />
+                        <Icon size={22} className={isActive ? "text-pink-700" : "text-slate-500"} />
                         <span className="text-[15px] font-medium leading-none tracking-[-0.04em]">{item.label}</span>
                       </div>
                     </button>
@@ -188,8 +188,8 @@ export default function Sidebar({
                 title={item.label}
                 onClick={() => onSelect?.(item.label)}
                 className={[
-                  "flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10",
-                  isActive ? "bg-gradient-to-r from-[#5b2f7a] to-[#3b2b5e] text-white" : "",
+                  "flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-slate-50 text-slate-600 transition hover:bg-slate-100",
+                  isActive ? "border-pink-200 bg-pink-50 text-pink-700" : "",
                 ].join(" ")}
               >
                 <Icon size={20} />
@@ -198,8 +198,8 @@ export default function Sidebar({
           })}
         </nav>
       ) : (
-        <div className="space-y-4 border-t border-white/10 pt-4">
-          <div className="flex items-center gap-3 text-[13px] text-white/90">
+        <div className="space-y-4 border-t border-slate-200 pt-4">
+          <div className="flex items-center gap-3 text-[13px] text-slate-600">
             <span className="inline-block h-3 w-3 rounded-full bg-[#41d69a] shadow-[0_0_12px_rgba(65,214,154,0.9)]" />
             <span>Open to opportunities</span>
           </div>
@@ -221,7 +221,7 @@ export default function Sidebar({
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-[#1d1131] text-white hover:bg-white/10"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:bg-pink-50"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[18px] w-[18px] fill-current">
                 <path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56v-2.17c-3.2.7-3.88-1.54-3.88-1.54-.52-1.33-1.27-1.68-1.27-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.67 1.24 3.32.95.1-.74.4-1.24.72-1.53-2.55-.29-5.24-1.28-5.24-5.68 0-1.25.45-2.28 1.18-3.08-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.17 1.18a10.9 10.9 0 0 1 5.78 0c2.2-1.49 3.17-1.18 3.17-1.18.62 1.58.23 2.75.11 3.04.73.8 1.18 1.83 1.18 3.08 0 4.41-2.69 5.38-5.26 5.67.41.35.78 1.04.78 2.1v3.12c0 .31.21.68.79.56A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z" />
@@ -232,7 +232,7 @@ export default function Sidebar({
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn"
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-[#1d1131] text-white hover:bg-white/10"
+              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:bg-pink-50"
             >
               <svg viewBox="0 0 24 24" aria-hidden="true" className="h-[18px] w-[18px] fill-current">
                 <path d="M6.94 8.5A1.56 1.56 0 1 1 6.93 5.4a1.56 1.56 0 0 1 .01 3.1ZM5.5 9.8h2.88v9.7H5.5V9.8Zm4.82 0h2.76v1.33h.04c.38-.73 1.32-1.5 2.72-1.5 2.91 0 3.45 1.92 3.45 4.4V19.5h-2.88v-18c0-1.58-.03-3.6-2.2-3.6-2.2 0-2.53 1.72-2.53 3.5v18h-2.88V9.8Z" />

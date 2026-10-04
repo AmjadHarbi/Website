@@ -13,16 +13,16 @@ export default function Projects() {
 
   return (
     <FadeInSection>
-      <section id="projects" className="bg-[#120d1f] px-4 py-20 text-white sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-[1200px] rounded-[30px] border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(116,78,183,0.22),_rgba(18,13,31,0.96)_42%)] px-4 py-8 sm:px-8 lg:px-10">
+      <section id="projects" className="px-4 py-20 text-slate-900 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-[1200px] rounded-[30px] border border-slate-200 bg-white px-4 py-8 shadow-[0_18px_40px_rgba(15,23,42,0.04)] sm:px-8 lg:px-10">
           <div className="flex items-end justify-between gap-6">
             <div>
-              <h2 className="mt-2 text-3xl font-bold tracking-[-0.05em] text-white sm:text-4xl lg:text-5xl">Projects</h2>
+              <h2 className="mt-2 text-3xl font-bold tracking-[-0.05em] text-slate-900 sm:text-4xl lg:text-5xl">Projects</h2>
             </div>
 
           </div>
 
-          <p className="mt-6 max-w-2xl text-sm leading-7 text-[#d4c9ec] sm:text-base">
+          <p className="mt-6 max-w-2xl text-sm leading-7 text-slate-600 sm:text-base">
             Personal builds, professional delivery work, and research focused on LLM-based Solidity vulnerability detection.
           </p>
 
@@ -37,15 +37,15 @@ export default function Projects() {
                   className={[
                     "inline-flex items-center gap-2 rounded-full border px-3 py-2 text-sm transition cursor-pointer",
                     isActive
-                      ? "border-purple-300/40 bg-gradient-to-r from-[#d292ff] to-[#cba3ff] text-[#1c1029] shadow-[0_0_25px_rgba(195,136,255,0.45)]"
-                      : "border-white/15 bg-white/5 text-[#f3eaff] hover:bg-white/10",
+                      ? "border-violet-300 bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-[0_8px_24px_rgba(124,58,237,0.2)]"
+                      : "border-slate-200 bg-slate-50 text-slate-700 hover:bg-slate-100",
                   ].join(" ")}
                 >
                   <span className="font-medium">{filter.label}</span>
                   <span
                     className={[
                       "inline-flex h-5 min-w-5 items-center justify-center rounded-full px-1 text-[10px] font-semibold",
-                      isActive ? "bg-[#1d1328] text-white" : "bg-white/10 text-[#efe6ff]",
+                      isActive ? "bg-white/15 text-white" : "bg-slate-200 text-slate-700",
                     ].join(" ")}
                   >
                     {filter.count}
@@ -59,37 +59,37 @@ export default function Projects() {
             {filteredProjects.map((project) => (
               <article
                 key={project.id}
-                className="group relative overflow-hidden rounded-[26px] border border-white/10 bg-[#1b1430]/80 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.04)] transition duration-200 hover:border-purple-300/20 hover:bg-[#20163a] sm:p-5"
+                className="group relative overflow-hidden rounded-[26px] border border-slate-200 bg-slate-50 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.8)] transition duration-200 hover:-translate-y-0.5 hover:border-violet-200 hover:bg-white sm:p-5"
               >
                 <div className="flex items-center justify-between gap-4">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-lg shadow-inner shadow-white/5">
+                    <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-lg shadow-sm">
                       {project.category === "Personal" ? "✦" : project.category === "Research" ? "◉" : "▣"}
                     </div>
                   </div>
 
                   {project.badge && (
-                    <span className="rounded-full border border-emerald-300/30 bg-emerald-500/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-300">
+                    <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-emerald-700">
                       {project.badge}
                     </span>
                   )}
                 </div>
 
-                <div className="mt-8 text-[10px] font-medium uppercase tracking-[0.28em] text-[#d4bae6]">
+                <div className="mt-8 text-[10px] font-medium uppercase tracking-[0.28em] text-violet-700">
                   {project.category}
                 </div>
 
-                <h3 className="mt-4 text-xl font-semibold leading-tight text-white sm:text-[22px]">
+                <h3 className="mt-4 text-xl font-semibold leading-tight text-slate-900 sm:text-[22px]">
                   {project.title}
                 </h3>
 
-                <p className="mt-4 text-sm leading-6 text-[#d8cde6]">{project.description}</p>
+                <p className="mt-4 text-sm leading-6 text-slate-600">{project.description}</p>
 
                 <div className="mt-6 flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-xs font-medium text-[#efe6ff]"
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700"
                     >
                       {tag}
                     </span>

@@ -85,7 +85,12 @@ export default function FullscreenNavigator() {
   const Section = sections[active] ?? Hero;
 
   return (
-    <div className="relative h-screen w-screen overflow-x-hidden">
+    <div className="relative isolate h-screen w-screen overflow-x-hidden">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center"
+        style={{ backgroundImage: "url('/img/hero.png')" }}
+      />
       <Sidebar
         isMobile={isMobile}
         mobileOpen={mobileNavOpen}

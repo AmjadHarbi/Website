@@ -101,16 +101,16 @@ export default function Contact() {
 
   return (
     <FadeInSection>
-      <section id="contact" className="px-3 py-20 sm:px-6 lg:px-10">
+      <section id="contact" className="px-3 py-20 text-slate-900 sm:px-6 lg:px-10">
         <div className="mx-auto max-w-5xl pr-1 sm:pr-0">
           <div className="mb-10 text-center">
-            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-violet-300/80 sm:text-sm">
+            <p className="mb-3 text-xs uppercase tracking-[0.3em] text-violet-600 sm:text-sm">
               Let&apos;s connect
             </p>
-            <h2 className="text-3xl font-bold tracking-[-0.05em] text-white sm:text-4xl lg:text-5xl">
+            <h2 className="text-3xl font-bold tracking-[-0.05em] text-slate-900 sm:text-4xl lg:text-5xl">
               Contact
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-sm text-gray-400 sm:text-base">
+            <p className="mx-auto mt-4 max-w-2xl text-sm text-slate-600 sm:text-base">
               I&apos;m open to software engineering opportunities, collaborations, and meaningful product work.
             </p>
           </div>
@@ -118,10 +118,10 @@ export default function Contact() {
           <div className="grid min-w-0 gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <form
               onSubmit={handleSubmit}
-              className="w-full min-w-0 rounded-3xl border border-violet-500/15 bg-[#111827]/70 p-4 shadow-[0_0_30px_rgba(168,85,247,0.05)] sm:p-6"
+              className="w-full min-w-0 rounded-[28px] border border-slate-200 bg-white p-4 shadow-[0_18px_40px_rgba(15,23,42,0.04)] sm:p-6"
             >
               <div className="grid gap-5 md:grid-cols-2">
-                <label className="block text-sm text-gray-300">
+                <label className="block text-sm text-slate-700">
                   Name
                   <input
                     type="text"
@@ -130,11 +130,11 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     placeholder="Your name"
-                    className="mt-2 w-full rounded-xl border border-violet-500/20 bg-[#0b1220] px-4 py-3 text-white placeholder:text-gray-500 focus:border-violet-400 focus:outline-none"
+                    className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-violet-400 focus:outline-none"
                   />
                 </label>
 
-                <label className="block text-sm text-gray-300">
+                <label className="block text-sm text-slate-700">
                   Email
                   <input
                     type="email"
@@ -143,12 +143,12 @@ export default function Contact() {
                     onChange={handleChange}
                     required
                     placeholder="your@email.com"
-                    className="mt-2 w-full rounded-xl border border-violet-500/20 bg-[#0b1220] px-4 py-3 text-white placeholder:text-gray-500 focus:border-violet-400 focus:outline-none"
+                    className="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-violet-400 focus:outline-none"
                   />
                 </label>
               </div>
 
-              <label className="mt-5 block text-sm text-gray-300">
+              <label className="mt-5 block text-sm text-slate-700">
                 Message
                 <textarea
                   name="message"
@@ -157,14 +157,14 @@ export default function Contact() {
                   required
                   rows={6}
                   placeholder="Tell me about your project, opportunity, or collaboration."
-                  className="mt-2 w-full resize-none rounded-xl border border-violet-500/20 bg-[#0b1220] px-4 py-3 text-white placeholder:text-gray-500 focus:border-violet-400 focus:outline-none"
+                  className="mt-2 w-full resize-none rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-slate-900 placeholder:text-slate-400 focus:border-violet-400 focus:outline-none"
                 />
               </label>
 
               {status && (
                 <p
                   className={`mt-4 text-sm ${
-                    status.type === "success" ? "text-emerald-400" : "text-red-400"
+                    status.type === "success" ? "text-emerald-600" : "text-red-500"
                   }`}
                 >
                   {status.message}
@@ -174,7 +174,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="mt-6 inline-flex items-center justify-center rounded-full bg-violet-500 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-400 disabled:cursor-not-allowed disabled:opacity-70"
+                className="mt-6 inline-flex items-center justify-center rounded-full bg-violet-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-violet-500 disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {isSubmitting ? "Sending..." : "Send message"}
               </button>
@@ -187,19 +187,19 @@ export default function Contact() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="group block w-full min-w-0 rounded-2xl border border-violet-500/15 bg-[#111827]/70 p-4 transition hover:-translate-y-1 hover:border-violet-400/30 sm:p-5"
+                  className="group block w-full min-w-0 rounded-[24px] border border-slate-200 bg-white p-4 shadow-[0_12px_28px_rgba(15,23,42,0.04)] transition hover:-translate-y-1 hover:border-violet-200 sm:p-5"
                 >
                   <div className="flex items-center justify-between gap-2 sm:gap-3">
                     <div className="flex min-w-0 items-center gap-2 sm:gap-3">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-500/10 text-violet-200 sm:h-11 sm:w-11">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-violet-50 text-violet-700 sm:h-11 sm:w-11">
                         <Icon className="h-4 w-4 sm:h-5 sm:w-5" />
                       </div>
                       <div className="min-w-0">
-                        <p className="truncate text-xs text-gray-400 sm:text-sm">{label}</p>
-                        <p className="truncate text-sm font-medium text-white sm:text-base">{value}</p>
+                        <p className="truncate text-xs text-slate-500 sm:text-sm">{label}</p>
+                        <p className="truncate text-sm font-medium text-slate-900 sm:text-base">{value}</p>
                       </div>
                     </div>
-                    <ArrowUpRight className="h-4 w-4 shrink-0 text-violet-300 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    <ArrowUpRight className="h-4 w-4 shrink-0 text-violet-600 transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </div>
                 </a>
               ))}
