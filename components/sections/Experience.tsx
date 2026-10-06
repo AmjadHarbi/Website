@@ -18,7 +18,7 @@ export default function Experience() {
             Experience
           </h2>
 
-          <p className="mb-10 max-w-2xl text-sm text-slate-600 sm:text-base">
+          <p className="mb-10 max-w-2xl text-sm text-slate-100 sm:text-base">
             Professional roles, contributions, and core technology areas.
           </p>
 

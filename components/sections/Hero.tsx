@@ -142,7 +142,7 @@ export default function Hero() {
               </span>
             </div>
 
-            <p className="mt-8 max-w-2xl text-base leading-relaxed text-gray-300 sm:text-lg">
+            <p className="mt-8 max-w-2xl text-base leading-relaxed text-slate-100 sm:text-lg">
               I build thoughtful digital experiences blending frontend engineering,
               research, and product-focused problem solving.
             </p>

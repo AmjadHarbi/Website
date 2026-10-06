@@ -17,7 +17,7 @@ export default function Education() {
           <h2 className="mb-4 text-3xl font-bold tracking-[-0.05em] text-slate-900 sm:text-4xl lg:text-5xl">
             Education
           </h2>
-          <p className="mb-10 max-w-2xl text-sm text-slate-600 sm:text-base">Academic background</p>
+          <p className="mb-10 max-w-2xl text-sm text-slate-100 sm:text-base">Academic background</p>
 
           <div className="relative space-y-8 before:hidden before:md:block before:absolute before:left-[18px] before:top-2 before:h-[calc(100%-16px)] before:w-px before:bg-gradient-to-b before:from-violet-400/80 before:via-indigo-300/60 before:to-transparent">
             {educationEntries.map((item) => (

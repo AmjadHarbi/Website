@@ -12,18 +12,18 @@ import Achievements from "@/components/sections/Achievements";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#0b0b10]">
-      <section id="home"><Hero /></section>
-      <section className="bg-[#f5f7fb]"><About /></section>
-      <section id="journey-map" className="bg-[#f5f7fb]"><JourneyMap /></section>
-      <section id="experience" className="bg-[#f5f7fb]"><Experience /></section>
-      <section id="projects" className="bg-[#f5f7fb]"><Projects /></section>
-      <section id="publications" className="bg-[#f5f7fb]"><Publications /></section>
-      <section id="education" className="bg-[#f5f7fb]"><Education /></section>
-      <section id="skills" className="bg-[#f5f7fb]"><SkillTree /></section>
-      <section id="achievements" className="bg-[#f5f7fb]"><Achievements /></section>
-      <section id="achievement-hall" className="bg-[#f5f7fb]"><AchievementHall /></section>
-      <section id="contact" className="bg-[#f5f7fb]"><Contact /></section>
+    <main className="ambient-background min-h-screen">
+      <section id="home" className="ambient-hero"><Hero /></section>
+      <section><About /></section>
+      <section id="journey-map"><JourneyMap /></section>
+      <section id="experience"><Experience /></section>
+      <section id="projects"><Projects /></section>
+      <section id="publications"><Publications /></section>
+      <section id="education"><Education /></section>
+      <section id="skills"><SkillTree /></section>
+      <section id="achievements"><Achievements /></section>
+      <section id="achievement-hall"><AchievementHall /></section>
+      <section id="contact"><Contact /></section>
     </main>
   );
 }

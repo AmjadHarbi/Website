@@ -83,14 +83,20 @@ export default function FullscreenNavigator() {
   }, []);
 
   const Section = sections[active] ?? Hero;
+  const isHome = active === "home";
 
   return (
     <div className="relative isolate h-screen w-screen overflow-x-hidden">
       <div
         aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-cover bg-center"
-        style={{ backgroundImage: "url('/img/hero.png')" }}
-      />
+        className={`pointer-events-none fixed inset-0 z-0 overflow-hidden ${isHome ? "bg-[#050a14]" : ""}`}
+      >
+        <div
+          className={`absolute -inset-2 bg-cover bg-center ${isHome ? "opacity-[0.62] blur-[3px]" : ""}`}
+          style={{ backgroundImage: "url('/img/hero.png')" }}
+        />
+        {isHome && <div className="absolute inset-0 bg-[#050a14]/25" />}
+      </div>
       <Sidebar
         isMobile={isMobile}
         mobileOpen={mobileNavOpen}
