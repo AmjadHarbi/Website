@@ -79,7 +79,7 @@ export default function Sidebar({
       <aside
         id="app-sidebar"
         className={[
-          "fixed z-50 overflow-hidden rounded-[32px] border border-slate-200 bg-white/95 text-slate-900 shadow-[0_12px_42px_rgba(15,23,42,0.12)] backdrop-blur-xl transition-all duration-300",
+          "fixed z-50 overflow-hidden rounded-[32px] border border-white/70 bg-white/70 text-slate-900 shadow-[0_12px_42px_rgba(15,23,42,0.12)] backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300",
           useMobile
             ? [
                 "left-2 top-2 bottom-2 h-auto w-[min(80vw,280px)] px-3 py-3",
@@ -137,7 +137,7 @@ export default function Sidebar({
         <nav className="space-y-5 pb-4">
           {navGroups.map((group) => (
             <div key={group.title}>
-              <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">
+              <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
                 {group.title}
               </div>
 

@@ -3,6 +3,7 @@
 import FadeInSection from "@/components/ui/FadeInSection";
 import { publications } from "@/data/publications";
 import { Microscope } from "lucide-react";
+import Link from "next/link";
 
 export default function Publications() {
   return (
@@ -18,7 +19,7 @@ export default function Publications() {
             Research & Publications
           </h2>
 
-          <p className="mb-10 max-w-2xl text-sm text-slate-600 sm:text-base">
+          <p className="mb-10 max-w-2xl text-sm text-slate-100 sm:text-base">
             Research focus: LLM-based Solidity smart contract vulnerability detection using GPT-3.5-Turbo, LLaMA-3 8B, and DeepSeek-R1-Distill-Qwen-14B.
           </p>
 
@@ -29,8 +30,15 @@ export default function Publications() {
                 className="rounded-[28px] border border-slate-200 bg-white p-5 shadow-[0_18px_40px_rgba(15,23,42,0.05)] transition duration-300 hover:-translate-y-0.5 hover:border-amber-200 hover:shadow-[0_22px_50px_rgba(234,179,8,0.08)] sm:p-8"
               >
                 <div className="flex flex-col gap-3">
-                  <h3 className="max-w-4xl text-xl font-bold text-slate-900 sm:text-2xl">
-                    {publication.title}
+                  <h3 className="max-w-2xl text-xl font-medium text-slate-700 sm:text-xl">
+                    <Link
+                      href={publication.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline decoration-amber-100 underline-offset-5 transition-colors hover:text-amber-700"
+                    >
+                      {publication.title}
+                    </Link>
                   </h3>
                 </div>
 
